@@ -23,6 +23,7 @@ public class CustomerController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		final String URI = req.getRequestURI().replace("/Learned_Brandon_P1/", "");
+		HttpSession session =  req.getSession();
 		
 		switch (URI) {
 		case "customer": //use for login maybe
@@ -35,7 +36,22 @@ public class CustomerController extends HttpServlet{
 				resp.getWriter().println(customer.getUsername());
 			}
 			
-			resp.getWriter().write("</body></html>");;
+			resp.getWriter().write("</body></html>");
+		case "customerlogin": //use for login maybe
+			Customer loginCust = customerDao.getByAttribute(req.getParameter("cusername"));
+			if(loginCust != null && req.getParameter("cpassword").equals(loginCust.getPassword())) {
+				session.setAttribute("customer", loginCust);
+				resp.sendRedirect("/Learned_Brandon_P1/storeselect");
+
+			} else {
+				resp.getWriter().write("<html><body>");
+				resp.getWriter().write("<p><b>Incorrect Username or password</b></p>");
+				resp.getWriter().write("<form method = \"get\" action = \"/Learned_Brandon_P1/home\">\r\n"
+						+ "			<input type =  \"submit\" value = \"Back To Menu\"/>\r\n"
+						+ "		</form>");
+				resp.getWriter().write("</body></html>");
+			}	
+			break;
 		default:
 			
 			break;
@@ -56,6 +72,7 @@ public class CustomerController extends HttpServlet{
 		if(customerDao.getByAttribute(username) != null) {
 			resp.getWriter().write("<html><body>");
 			resp.getWriter().write("<h2>Customer: " + username + " already exists!</h2>");
+			//button to go back to home page
 			resp.getWriter().write("<form method = \"get\" action = \"/Learned_Brandon_P1/home\">\r\n"
 					+ "			<input type =  \"submit\" value = \"Back To Menu\"/>\r\n"
 					+ "		</form>");

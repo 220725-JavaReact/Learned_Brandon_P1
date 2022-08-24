@@ -16,7 +16,17 @@
   	<servlet-name>CustomerController</servlet-name>
   	<url-pattern>/customer</url-pattern>
   	<url-pattern>/allcustomers</url-pattern>
+  	<url-pattern>/customerlogin</url-pattern>
   	<url-pattern>/createcustomer</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>StoreFrontController</servlet-name>
+  	<servlet-class>com.revature.controllers.StoreFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>StoreFrontController</servlet-name>
+  	<url-pattern>/storeselect</url-pattern>
   </servlet-mapping>
   
    <servlet>
@@ -26,6 +36,20 @@
   <servlet-mapping>
   	<servlet-name>RedirectController</servlet-name>
   	<url-pattern>/home</url-pattern>
+  	<url-pattern>/setstore</url-pattern>
+  	<url-pattern>/clearstore</url-pattern>
+  	<url-pattern>/addtoorder</url-pattern>
+  	<url-pattern>/vieworders</url-pattern>
+  	
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>CRUDController</servlet-name>
+  	<servlet-class>com.revature.controllers.CRUDController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CRUDController</servlet-name>
+  	<url-pattern>/finalizeorder</url-pattern>
   </servlet-mapping>
   
 </web-app>

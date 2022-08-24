@@ -67,9 +67,11 @@ public class StoreFront {
 
 	@Override
 	public String toString() {
-		return "StoreFront [name=" + name + ", address=" + address + ", orderList="
-				+ orderList + "]";
+		return "StoreFront [id=" + id + ", name=" + name + ", address=" + address + ", lineItems=" + lineItems
+				+ ", orderList=" + orderList + "]";
 	}
+
+
 	
 	
 	

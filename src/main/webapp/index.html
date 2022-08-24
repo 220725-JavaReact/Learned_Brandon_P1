@@ -1,10 +1,57 @@
 <html>
-	<body>
-		<h1>Welcome to Duckie Emporium.</h1>
-		<h2>Where Every Day is Your Duckie Day!</h2>
-		<p>Please Select From the Options Below</p>
-		
-		
+<style>
+html{
+	background-image: url(https://cdn.pixabay.com/photo/2020/05/15/14/01/pool-5173672_960_720.jpg);
+	background-size: cover;
+
+}
+body {
+	padding-top: 50px;
+  background-color: white;
+  max-width: 555px;
+  margin: auto;
+}
+h1, h2 {
+	text-align: center;
+	color: #f2f2f2;
+}
+
+header {
+	padding-top: 200px;
+	background-color: #333;
+	padding: 10px;
+	margin-top: -60px;
+	margin-bottom: 30px;
+}
+
+fieldset {
+	margin: 0px auto;
+	max-width: 50px;
+	text-align: auto;
+}
+
+input[type="submit"]{
+	text-align: auto;
+	margin-top: 10px;
+	margin-bottom: -10px;
+}
+
+div {
+	margin-top: 30px;
+	margin-left: 10px;
+	float: left;
+}
+img {
+	height: 140px;
+	width: 130px;
+}
+
+</style>
+	<body class = "content">
+		<header>
+			<h1 class="header">Welcome to Duckie Emporium.</h1>
+			<h2> We're "Quack" with a Vengeance!</h2>
+		</header>
 		<fieldset>
 			<legend>Employee Login</legend>
 			<form method = "get" action = "">
@@ -16,16 +63,16 @@
 				</label><br/>
 				<input type="submit" value = "Login">
 			</form>
-		</fieldset>
+		</fieldset style="width: 540px;">
 		
 		<fieldset>
 			<legend>Customer Login</legend>
-			<form method = "get" action = "">
+			<form method = "get" action = "/Learned_Brandon_P1/customerlogin">
 				<label>Username:<br/>
-				<input type =  "text" name="cusername" placeholder="Username..." maxlength="20">
+				<input type =  "text" name="cusername" required="required" placeholder="Username..." maxlength="20">
 				</label><br/>
 				<label>Password:<br/>
-				<input type =  "text" name="cpassword" placeholder="Password..." maxlength="20">
+				<input type =  "text" name="cpassword" required="required" placeholder="Password..." maxlength="20">
 				</label><br/>
 				<input type="submit" value = "Login">
 			</form>
@@ -36,28 +83,28 @@
 			<form method = "post" action = "/Learned_Brandon_P1/createcustomer">
 				<label>First Name:<br/>
 				<input type =  "text" name="firstname" required="required" pattern="[a-zA-Z]*" placeholder="First Name..." maxlength="50">
-				<i>(Numbers/Special Characters Not Allowed)</i>								
 				</label><br/>
 				<label>Last Name:<br/>
 				<input type =  "text" name="lastname" required="required" pattern="[a-zA-Z]*" placeholder="Last Name..." maxlength="50">
-				<i>(Numbers/Special Characters Not Allowed)</i>				
 				</label><br/>
 				<label>Username: <br/>
 				<input type =  "text" name="cusername" required="required" pattern="[a-zA-Z0-9]*" placeholder="Username..." minlength = "8" maxlength="20">
-				<i>(Special Characters Not Allowed - 8-20 Characters)</i>
 				</label><br/>
 				<label>Password: <br/>
 				<input type =  "text" name="cpassword" required="required" placeholder="Password..." minlength = "8" maxlength="20">
-				<i>(8-20 Characters)</i>
 				</label><br/>
 				<label>Email Address: <br/>
 				<input type =  "email" name="email" required="required" placeholder="Email..." maxlength="50">
-				<i>(Ex: email@email.com)</i>
 				</label><br/>
 				<input type="submit" value = "Create Account">
 			</form>
 		</fieldset>
-		
 
+		<div class="duckies">
+			<img src="https://target.scene7.com/is/image/Target/GUEST_e672fd28-d428-4484-8985-32a5aacdc043"</br>
+			<img src="https://target.scene7.com/is/image/Target/GUEST_e672fd28-d428-4484-8985-32a5aacdc043"</br>
+			<img src="https://target.scene7.com/is/image/Target/GUEST_e672fd28-d428-4484-8985-32a5aacdc043"</br>
+			<img src="https://target.scene7.com/is/image/Target/GUEST_e672fd28-d428-4484-8985-32a5aacdc043"</br>
+		</div>
 	</body>
 </html>
