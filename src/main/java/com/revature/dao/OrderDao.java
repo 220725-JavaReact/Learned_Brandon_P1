@@ -1,6 +1,6 @@
 package com.revature.dao;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -114,6 +114,60 @@ public class OrderDao implements Dao<Order>{
 				
 			}	
 			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong");
+			return null;
+		}
+		return orders;
+	}
+	
+	public ArrayList<Order> getAllByStorefrontId(StoreFront storeFront) {
+
+		ArrayList<Order> orders = new ArrayList<>(); //create line item, add it to order
+		
+		try(Connection connection = ConnectionUtil.getConnection()){
+			String query = "select * from orders \r\n"
+					+ "natural inner join order_items \r\n"
+					+ "natural inner join products \r\n"
+					+ "natural inner join storefronts\r\n"
+					+ "where storefront_id = ?\r\n"
+					+ "order by order_id;";
+			PreparedStatement pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1, storeFront.getId());
+			ResultSet rs = pstmt.executeQuery();
+			
+			boolean doNext = true;
+
+			while(rs.next()) {
+				for(Order order : orders) {
+					if(order.getId() == rs.getInt("order_id")) {
+						Product duckie = new Product(rs.getInt("product_id"), 
+								rs.getString("product_name"),
+								rs.getDouble("price"), 
+								rs.getString("description"), 
+								rs.getString("quality"));
+						LineItem lineItem = new LineItem(duckie, rs.getInt("quantity"));
+						order.addLineItem(lineItem);
+						doNext = false;
+					} 
+				}
+				if(doNext == true) {
+					Order order = new Order(rs.getInt("order_id"), rs.getString("storefront_name"));
+					Product duckie = new Product(rs.getInt("product_id"), 
+							rs.getString("product_name"),
+							rs.getDouble("price"), 
+							rs.getString("description"), 
+							rs.getString("quality"));
+					LineItem lineItem = new LineItem(duckie, rs.getInt("quantity"));
+					order.addLineItem(lineItem);
+					orders.add(order);
+				} else {
+					doNext = true;
+				}
+				
+			}	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -41,17 +41,36 @@ public class RedirectController extends HttpServlet{
 			session.setAttribute("currentorder", new Order(returnStore.getAddress()));
 			resp.sendRedirect("/Learned_Brandon_P1/storeselect");
 			break;
+		case "empsetstore":
+			int empstoreid = Integer.parseInt(req.getParameter("stores"));
+			StoreFront empreturnStore = storeFrontDao.getById(empstoreid);
+			storeFrontDao.initializeAllProducts(empreturnStore);
+			session.setAttribute("storechoice", empreturnStore);
+			
+			resp.sendRedirect("/Learned_Brandon_P1/empstoreselect");
+			break;
 		case "clearstore":
 			session.setAttribute("currentorder", null);
 			session.setAttribute("storechoice", null);
 			session.setAttribute("previousorders", null);
 			resp.sendRedirect("/Learned_Brandon_P1/storeselect");
 			break;
+		case "empclearstore":
+			session.setAttribute("storechoice", null);
+			session.setAttribute("previousorders", null);
+			session.setAttribute("updateditems", null);
+			resp.sendRedirect("/Learned_Brandon_P1/empstoreselect");
+			break;
 		case "vieworders":
 			Customer customer = (Customer) session.getAttribute("customer");
 			ArrayList<Order> previousOrders = orderDao.getAllById(customer.getId());
 			session.setAttribute("previousorders", previousOrders);
 			resp.sendRedirect("/Learned_Brandon_P1/storeselect");
+			break;
+		case "viewstoreorders":
+			ArrayList<Order> orderList = orderDao.getAllByStorefrontId((StoreFront) session.getAttribute("storechoice"));
+			session.setAttribute("previousorders", orderList);
+			resp.sendRedirect("/Learned_Brandon_P1/empstoreselect");
 			break;
 		default:	
 			break;
@@ -93,10 +112,36 @@ public class RedirectController extends HttpServlet{
 
 			}	
 			break;
+		case "updatequantity":
+			ArrayList<LineItem> updateItems = new ArrayList<>();
+			StoreFront empStoreFront = (StoreFront) session.getAttribute("storechoice");
+			System.out.println(empStoreFront.getName());
+			for(LineItem item : empStoreFront.getLineItems()) {
+				String intValue = req.getParameter(String.valueOf(item.getProduct().getId()));
+				System.out.println(intValue);
+				int quantityToSet = Integer.parseInt(intValue);
+				updateItems.add(new LineItem(item.getProduct(), quantityToSet - item.getQuantity()));
+				item.setQuantity(quantityToSet);
+				System.out.println(quantityToSet);
+			}	
+			storeFrontDao.updateAllLineItems(empStoreFront);
+			session.setAttribute("updateditems", updateItems);
+			session.setAttribute("storechoice", empStoreFront);
+			break;
 		default:	
 			break;
 		}
-		resp.sendRedirect("/Learned_Brandon_P1/storeselect");
+		
+		if(URI.equals("addtoorder")) {
+			resp.sendRedirect("/Learned_Brandon_P1/storeselect");
+		} else {
+//			writer.write("<p>done</p>");
+//			wrtier.write(<)
+			resp.sendRedirect("/Learned_Brandon_P1/empstoreselect");
+		}
+		
+
+//		
 
 	}
 }

@@ -93,8 +93,21 @@ public class StoreFrontDao implements Dao<StoreFront> {
 
 	}
 	
-	public ArrayList<Order> initializeAllOrders(){
-		return null;
+	public void updateAllLineItems(StoreFront storeFront){
+		StringBuilder query  = new StringBuilder();
+		for(LineItem lineItem : storeFront.getLineItems()) {
+			query.append("update storefront_items set quantity = " + lineItem.getQuantity() 
+			+ " where storefront_id = " + storeFront.getId() + " and product_id = " + lineItem.getProduct().getId() + ";\n");
+		}
+		try(Connection connection = ConnectionUtil.getConnection()){
+			PreparedStatement pstmt = connection.prepareStatement(query.toString());
+			pstmt.executeQuery();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Something went wrong");
+		}
 	}
 
 }

@@ -1,6 +1,4 @@
-package com.revature.HelperMethods;
-
-import javax.servlet.http.HttpServlet;
+package com.revature.helpermethods;
 
 public class CSS {
 
@@ -14,13 +12,13 @@ public class CSS {
 				+ "\r\n"
 				+ "}\r\n"
 				+ "body {\r\n"
-				+ "	padding-top: 50px;\r\n"
+				+ "	padding-top: -10px;\r\n"
 				+ "  background-color: white;\r\n"
 				+ "  max-width: 555px;\r\n"
 				+ "  margin: auto;\r\n"
-				+ "  padding-bottom: 20px;"
+				+ "  padding-bottom: 50px;"
 				+ "}"
-				+ "h1, h2 {\r\n"
+				+ "h1, h2, h3{\r\n"
 				+ "	text-align: center;\r\n"
 				+ "}\r\n"
 				+ "\r\n"
@@ -61,13 +59,15 @@ public class CSS {
 				+ "}"
 				+ ".user {"
 				+ "background-color: white;"
-				+ "float: left;"
+//				+ "float: left;"
+				+ "margin: auto;"
+				+ "width: 50%;"
 				+ "}"
 				+ ".user h2{"
 				+ "font-size: 30px;"
 				+ "}"
 				+ ".user img{"
-				+ "margin-top: 10px;"
+//				+ "margin-top: 10px;"
 				+ "}"
 				+ "</style>";
 		
@@ -79,12 +79,12 @@ public class CSS {
 				+ "\r\n"
 				+ "}\r\n"
 				+ "body {\r\n"
-				+ "	padding-top: 50px;\r\n"
+				+ "	padding-top: -10px;\r\n"
 				+ "  background-color: white;\r\n"
 				+ "  max-width: 555px;\r\n"
 				+ "  margin: auto;\r\n"
 				+ "}"
-				+ "h1, h2 {\r\n"
+				+ "h1, h2, h3{\r\n"
 				+ "	text-align: center;\r\n"
 				+ "}\r\n"
 				+ "\r\n"
@@ -125,20 +125,22 @@ public class CSS {
 				+ "}"
 				+ ".user {"
 				+ "background-color: white;"
-				+ "float: left;"
+//				+ "float: left;"
+				+ "margin: auto;"
+				+ "width: 50%;"
 				+ "}"
 				+ ".user h2{"
 				+ "font-size: 30px;"
 				+ "}"
 				+ ".user img{"
-				+ "margin-top: 10px;"
+//				+ "margin-top: 10px;"
 				+ "}"
 				+ "</style>";
 		
 		if(bool == true) {
-			return css;
-		} else {
 			return css2;
+		} else {
+			return css;
 		}
 	}
 	
