@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  # Build phase is running a bunch of CLI commands to build our .war file
+  build:
+    commands:
+      - echo "Building a .war file"
+      - java -version
+      - mvn clean package
+
+# This is the files that we are going to send to our elastic beanstalk
+# We are sending the Dockerfile and everything that got generated using "mvn clean package"
+artifacts:
+  files:
+    - Dockerfile
+    - target/**/*
