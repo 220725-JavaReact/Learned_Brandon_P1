@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import com.revature.models.Customer;
 import com.revature.utils.ConnectionUtil;
+import com.revature.utils.Logger;
+import com.revature.utils.Logger.LogLevel;
 
 public class CustomerDao implements Dao<Customer> {
 
@@ -23,6 +25,7 @@ public class CustomerDao implements Dao<Customer> {
 			pstmt.setString(4, instance.getPassword());
 			pstmt.setString(5, instance.getEmail());
 			pstmt.execute();
+			Logger.getLogger().log(LogLevel.info, "\nNew User Created: " + instance.toString() + "\n");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Something went wrong");
